@@ -65,6 +65,7 @@ class Exporter
                     'title'   => $post->post_title,
                     'content' => wpautop($post->post_content),
                     'author'  => $author,
+                    'excerpt' => $page->post_excerpt
                 ),
                 'categories' => array_map(function ($category) {
                     return $category->slug;
@@ -91,11 +92,11 @@ class Exporter
                 'data'  => array(
                     'title'        => $page->post_title,
                     'post_content' => $page->post_content,
+                    'excerpt' => $page->post_excerpt
                 ),
             );
 
             foreach ($this->metadata('page', $page) as $key => $meta) {
-                $this->pages[$page->post_name]['data'][$key] = reset($meta);
             }
         }
     }
