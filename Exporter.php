@@ -90,8 +90,8 @@ class Exporter
             $this->pages['/' . $page->post_name] = array(
                 'order' => $page->menu_order,
                 'data'  => array(
-                    'title'        => $page->post_title,
-                    'post_content' => $page->post_content,
+                    'title' => $page->post_title,
+                    'content' => $page->post_content,
                     'excerpt' => $page->post_excerpt
                 ),
             );
