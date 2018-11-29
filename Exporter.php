@@ -87,7 +87,7 @@ class Exporter
         ));
 
         foreach ($pages as $page) {
-            $this->pages['/' . $page->post_name] = array(
+            $this->pages['/' . get_page_uri($page)] = array(
                 'order' => $page->menu_order,
                 'data'  => array(
                     'title' => $page->post_title,
