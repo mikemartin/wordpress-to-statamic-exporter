@@ -73,7 +73,11 @@ class Exporter
             );
 
             foreach ($this->metadata('post', $post) as $key => $meta) {
-                $this->collections[$slug]["/{$slug}/" . $post->post_name]['data'][$key] = reset($meta);
+                if($key == "_thumbnail_id") {
+                    $this->collections[$slug]["/{$slug}/" . $post->post_name]['data'][$key] = explode(site_url() . '/wp-content/uploads', wp_get_attachment_url(reset($meta)))[1];
+                } else {
+                    $this->collections[$slug]["/{$slug}/" . $post->post_name]['data'][$key] = reset($meta);
+                }
             }
         }
     }
@@ -96,7 +100,12 @@ class Exporter
                 ),
             );
 
-            foreach ($this->metadata('page', $page) as $key => $meta) {
+            foreach ($this->metadata('post', $page) as $key => $meta) {
+                if($key == "_thumbnail_id") {
+                    $this->pages['/' . get_page_uri($page)]['data'][$key] = explode(site_url() . '/wp-content/uploads', wp_get_attachment_url(reset($meta)))[1];
+                } else {
+                    $this->pages['/' . get_page_uri($page)]['data'][$key] = reset($meta);
+                }
             }
         }
     }
