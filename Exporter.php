@@ -65,11 +65,12 @@ class Exporter
                     'title'   => $post->post_title,
                     'content' => wpautop($post->post_content),
                     'author'  => $author,
-                    'excerpt' => $page->post_excerpt
+                    'excerpt' => $post->post_excerpt,
+                    'categories' => array_map(function ($category) {
+                        return $category->slug;
+                    }, get_the_category($post->ID)),
                 ),
-                'categories' => array_map(function ($category) {
-                    return $category->slug;
-                }, get_the_category($post->ID)),
+
             );
 
             foreach ($this->metadata('post', $post) as $key => $meta) {
